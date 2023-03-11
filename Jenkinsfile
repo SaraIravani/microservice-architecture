@@ -1,19 +1,14 @@
 pipeline {
-  agent none
+  agent any
   stages {
     stage("verify tooling") {
-      agent{
-            docker{ image 'bibinwilson/jenkins-slave' }
-      }
-
       steps {
-        sh '''
-          docker version
+        sh '
           docker info
           docker compose version 
           curl --version
           jq --version
-        '''
+        '
       }
     }
     stage('Prune Docker data') {
