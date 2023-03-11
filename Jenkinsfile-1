@@ -1,12 +1,17 @@
 pipeline {
     agent {
-        docker { image 'jenkins-slave ' }
+        docker {
+            image 'maven:3.9.0-eclipse-temurin-11'
+            args '-v $HOME/.m2:/root/.m2'
+        }
     }
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh 'jenkins-slave --version'
+                sh 'mvn -B'
             }
         }
     }
-}
+}~
+~
+
