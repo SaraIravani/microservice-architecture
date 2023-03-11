@@ -1,7 +1,11 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage("verify tooling") {
+      agent{
+            docker{ image 'bibinwilson/jenkins-slave' }
+      }
+
       steps {
         sh '''
           docker version
